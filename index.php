@@ -13,14 +13,14 @@
   <script type='text/javascript' src='js/streetviewmap.js'></script>
   <script type='text/javascript'>
   $(document).ready(function() {
-      //
-      // Setup
-      //
+    //
+    // Setup
+    //
 
-      var round = 1;
-      var points = 0;
-      var roundScore = 0;
-      var totalScore = 0;
+    var round = 1;
+    var points = 0;
+    var roundScore = 0;
+    var totalScore = 0;
 
     //
     //  Init maps
@@ -101,18 +101,25 @@
           totalScore = totalScore + points;
 
           $('.round').html('Current Round: <b>'+round+'/5</b>');
-          $('.roundScore').html('Round Score: <b>'+roundScore+'</b>');
+          $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
           $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
+
+          $('#roundEnd').html('Your guess was '+distance+'km away from the actual location.<br/> You scored '+roundScore+' points this round!<br/><div class="closeBtn">Next round &raquo;</div>');
+          $('#roundEnd').fadeIn();
 
           // Reload maps to refresh coords
           svinitialize();
           mminitialize();
         }
 
-        if (round == 5){
+        if (round >= 5){
 
+          // Check if they've submitted their last guess, ending the game
           if (window.finished) {
             
+            roundScore = points;
+            totalScore = totalScore + points;
+
             $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
             $('#endGame').html("Congrats! Your final score was "+totalScore);
             $('#endGame').fadeIn(500);
@@ -123,7 +130,7 @@
           totalScore = totalScore + points;
 
           $('.round').html('Current Round: <b>'+round+'/5</b>');
-          $('.roundScore').html('Round Score: <b>'+roundScore+'</b>');
+          $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
           $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
 
           // Reload maps to refresh coords
@@ -141,15 +148,20 @@
 
     });
 
+    $('#roundEnd').on('click', '.closeBtn', function () {
+      $('#roundEnd').fadeOut(500);
+    });
+
   });
   </script>
 </head> 
 <body>
   <div id='content'>
+  <div id="roundEnd"></div>
   <div id="endGame"></div>
 	<div id='scoreBoard'>
 		<span class='round'>Current Round: <b>1/5</b></span><br/>
-    <span class='roundScore'>Round Score: <b>0</b></span><br/>
+    <span class='roundScore'>Last Round Score: <b>0</b></span><br/>
 		<span class='totalScore'>Total Score: <b>0</b></span>
 	</div>
     <div id='miniMap'></div>
