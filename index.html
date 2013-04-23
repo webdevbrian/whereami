@@ -28,18 +28,18 @@
     svinitialize();
     mminitialize();
 
-  	//
-  	// Scoreboard & Guess button event
-  	//
-  	
+    //
+    // Scoreboard & Guess button event
+    //
+    
     $('#guessButton').click(function (){
 
       if (window.guessLatLng){
 
-      	// Calculate distance between points function
-      	function calcDistance (fromLat, fromLng, toLat, toLng) {
-       		return google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng));
-      	};
+        // Calculate distance between points function
+        function calcDistance (fromLat, fromLng, toLat, toLng) {
+          return google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng));
+        };
 
         // Reset marker function
         function resetMarker() {
@@ -49,13 +49,13 @@
             }
         };
 
-      	// Explode latLng variables into separate variables for calcDistance function
-      	locLatLongs = window.locLL.toString();
-      	guessLatLongs = window.guessLatLng.toString();
-      	
+        // Explode latLng variables into separate variables for calcDistance function
+        locLatLongs = window.locLL.toString();
+        guessLatLongs = window.guessLatLng.toString();
+        
         // Make arrays and clean from (){} characters
-      	locArray = locLatLongs.replace(/[\])}[{(]/g,'').split(',');
-      	guessArray = guessLatLongs.replace(/[\])}[{(]/g,'').split(',');
+        locArray = locLatLongs.replace(/[\])}[{(]/g,'').split(',');
+        guessArray = guessLatLongs.replace(/[\])}[{(]/g,'').split(',');
 
         // Calculate distance between points, and convert to kilometers
         distance = Math.ceil(calcDistance(locArray[0], locArray[1], guessArray[0], guessArray[1]) / 1000);
@@ -126,7 +126,7 @@
             totalScore = totalScore + points;
 
             $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
-            $('#endGame').html('<p><h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/>Share this on:<br/><br/><button class="btn" type="submit">Facebook</button> <button class="btn" type="submit">Twitter</button></p><br/><button class="btn btn-large btn-success" type="button">Play Again?</button>');
+            $('#endGame').html('<p><h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/>Share this on:<br/><br/><a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/webdevbrian/whereami">Facebook</a> <a class="btn" href="https://twitter.com/intent/tweet?text=whereami+by+webdevbrian+based+off+of+geoguessr%21&url=https://github.com/webdevbrian/whereami">Twitter</a></p><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
             $('#endGame').fadeIn(500);
 
           }
@@ -148,9 +148,17 @@
 
     });
 
+    // End of round continue button click
     $('#roundEnd').on('click', '.closeBtn', function () {
       $('#roundEnd').fadeOut(500);
     });
+
+    // End of game 'play again' button click
+    $('#endGame').on('click', '.playAgain', function () {
+      window.location.reload();
+    });
+
+    
 
   });
   </script>
@@ -159,11 +167,11 @@
   <div id='content'>
     <div id="roundEnd"></div>
     <div id="endGame"></div>
-  	<div id='scoreBoard'>
-  		<span class='round'>Current Round: <b>1/5</b></span><br/>
+    <div id='scoreBoard'>
+      <span class='round'>Current Round: <b>1/5</b></span><br/>
       <span class='roundScore'>Last Round Score: <b>0</b></span><br/>
-  		<span class='totalScore'>Total Score: <b>0</b></span>
-  	</div>
+      <span class='totalScore'>Total Score: <b>0</b></span>
+    </div>
     <div id='miniMap'></div>
     <div id='guessButton' class="btn btn-large btn-danger">Make Your Guess</div>
     <div id='pano'></div>
