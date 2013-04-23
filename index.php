@@ -146,6 +146,8 @@
         alert('You need to make a guess first!');
       }
 
+      window.guessLatLng = '';
+
     });
 
     $('#roundEnd').on('click', '.closeBtn', function () {
@@ -157,15 +159,15 @@
 </head> 
 <body>
   <div id='content'>
-  <div id="roundEnd"></div>
-  <div id="endGame"></div>
-	<div id='scoreBoard'>
-		<span class='round'>Current Round: <b>1/5</b></span><br/>
-    <span class='roundScore'>Last Round Score: <b>0</b></span><br/>
-		<span class='totalScore'>Total Score: <b>0</b></span>
-	</div>
+    <div id="roundEnd"></div>
+    <div id="endGame"></div>
+  	<div id='scoreBoard'>
+  		<span class='round'>Current Round: <b>1/5</b></span><br/>
+      <span class='roundScore'>Last Round Score: <b>0</b></span><br/>
+  		<span class='totalScore'>Total Score: <b>0</b></span>
+  	</div>
     <div id='miniMap'></div>
-	<div id='guessButton'>Make Your Guess</div>
+    <div id='guessButton'>Make Your Guess</div>
     <div id='pano'></div>
   </div>
 </body>
