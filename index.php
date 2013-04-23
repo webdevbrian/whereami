@@ -3,9 +3,8 @@
 <head>
   <meta charset='utf-8'>
   <title>Whereami</title>
-  <link rel='stylesheet' href='reset.css' /> 
-  <link rel='stylesheet' href='normalize.css' />
-  <link rel='stylesheet' href='style.css' /> 
+  <link rel='stylesheet' href='css/bootstrap.css' />
+  <link rel='stylesheet' href='css/style.css' /> 
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
   <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCZOXlIZdfYBcn_W8UrY-JYrE3eueQq4_k&sensor=false&libraries=geometry'></script>
   <script type='text/javascript' src='js/rnd.js'></script>
@@ -103,8 +102,7 @@
           $('.round').html('Current Round: <b>'+round+'/5</b>');
           $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
           $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
-
-          $('#roundEnd').html('Your guess was '+distance+'km away from the actual location.<br/> You scored '+roundScore+' points this round!<br/><div class="closeBtn">Next round &raquo;</div>');
+          $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location.<br/><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
           $('#roundEnd').fadeIn();
 
           // Reload maps to refresh coords
@@ -114,6 +112,13 @@
 
         if (round >= 5){
 
+          roundScore = points;
+          totalScore = totalScore + points;
+
+          $('.round').html('Current Round: <b>'+round+'/5</b>');
+          $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
+          $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
+
           // Check if they've submitted their last guess, ending the game
           if (window.finished) {
             
@@ -121,17 +126,10 @@
             totalScore = totalScore + points;
 
             $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
-            $('#endGame').html("Congrats! Your final score was "+totalScore);
+            $('#endGame').html('<p><h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/>Share this on:<br/><br/><button class="btn" type="submit">Facebook</button> <button class="btn" type="submit">Twitter</button></p><br/><button class="btn btn-large btn-success" type="button">Play Again?</button>');
             $('#endGame').fadeIn(500);
 
           }
-
-          roundScore = points;
-          totalScore = totalScore + points;
-
-          $('.round').html('Current Round: <b>'+round+'/5</b>');
-          $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
-          $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
 
           // Reload maps to refresh coords
           svinitialize();
@@ -167,7 +165,7 @@
   		<span class='totalScore'>Total Score: <b>0</b></span>
   	</div>
     <div id='miniMap'></div>
-    <div id='guessButton'>Make Your Guess</div>
+    <div id='guessButton' class="btn btn-large btn-danger">Make Your Guess</div>
     <div id='pano'></div>
   </div>
 </body>
