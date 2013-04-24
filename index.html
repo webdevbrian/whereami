@@ -10,6 +10,7 @@
   <script type='text/javascript' src='js/rnd.js'></script>
   <script type='text/javascript' src='js/minimap.js'></script>
   <script type='text/javascript' src='js/streetviewmap.js'></script>
+  <script type='text/javascript' src='js/roundmap.js'></script>
   <script type='text/javascript'>
   $(document).ready(function() {
     //
@@ -27,6 +28,7 @@
 
     svinitialize();
     mminitialize();
+
 
     //
     // Scoreboard & Guess button event
@@ -54,11 +56,11 @@
         guessLatLongs = window.guessLatLng.toString();
         
         // Make arrays and clean from (){} characters
-        locArray = locLatLongs.replace(/[\])}[{(]/g,'').split(',');
-        guessArray = guessLatLongs.replace(/[\])}[{(]/g,'').split(',');
+        window.locArray = locLatLongs.replace(/[\])}[{(]/g,'').split(',');
+        window.guessArray = guessLatLongs.replace(/[\])}[{(]/g,'').split(',');
 
         // Calculate distance between points, and convert to kilometers
-        distance = Math.ceil(calcDistance(locArray[0], locArray[1], guessArray[0], guessArray[1]) / 1000);
+        distance = Math.ceil(calcDistance(window.locArray[0], window.locArray[1], window.guessArray[0], window.guessArray[1]) / 1000);
         console.log(distance);
 
         // Calculate points awarded via guess proximity
@@ -102,12 +104,15 @@
           $('.round').html('Current Round: <b>'+round+'/5</b>');
           $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
           $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
-          $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location.<br/><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+
+          $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location.<br/><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
           $('#roundEnd').fadeIn();
 
           // Reload maps to refresh coords
           svinitialize();
           mminitialize();
+          rminitialize();
+          
         }
 
         if (round >= 5){

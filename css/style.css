@@ -23,7 +23,9 @@ html,body { width: 100%; height: 100%;}
 	Round specific
 *********************************/
 
-#roundEnd { position: absolute; top: 50%; left: 50%; width: 400px; height: 300px; margin: -190px 0 0 -240px; padding: 20px; background: white; text-align: center; display: none; z-index: 1000; box-shadow: 0px 0px 20px rgba(255,255,255, 0.9); }
+#roundEnd { position: absolute; left: 50%; width: 400px; margin: 40px 0 0 -200px; padding: 20px; background: white; text-align: center; display: none; z-index: 1005; box-shadow: 0px 0px 20px rgba(255,255,255, 0.9); }
+#roundEnd #roundMap { width: 400px; height: 200px; background: red; margin: 20px 0; }
 #roundEnd .closeBtn { cursor: pointer; }
+
 
 #endGame { position: absolute; top: 50%; left: 50%; width: 400px; margin: -190px 0 0 -240px; padding: 20px; background: #EFEFEF; text-align: center; display: none; z-index: 1000; }
