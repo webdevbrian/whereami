@@ -61,14 +61,15 @@
 
         // Calculate distance between points, and convert to kilometers
         distance = Math.ceil(calcDistance(window.locArray[0], window.locArray[1], window.guessArray[0], window.guessArray[1]) / 1000);
-        console.log(distance);
 
         // Calculate points awarded via guess proximity
         function inRange(x, min, max) {
             return (min <= x && x <= max);
         };
 
-        if(inRange(distance, 1, 10)) {
+        if(inRange(distance, 1, 2)) {
+          points = 10000;
+        } else if(inRange(distance, 3, 10)) {
           points = 7000;
         } else if(inRange(distance, 11, 50)) {
           points = 4000;
@@ -131,7 +132,7 @@
             totalScore = totalScore + points;
 
             $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
-            $('#endGame').html('<p><h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/>Share this on:<br/><br/><a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/webdevbrian/whereami">Facebook</a> <a class="btn" href="https://twitter.com/intent/tweet?text=whereami+by+webdevbrian+based+off+of+geoguessr%21&url=https://github.com/webdevbrian/whereami">Twitter</a></p><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
+            $('#endGame').html('<p><h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/>Share this on:<br/><br/><a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/webdevbrian/whereami">Facebook</a> <a class="btn" href="https://twitter.com/intent/tweet?text=I+just+scored+'+totalScore+'+playing+whereami+by+@phrozen755,+based+off+of+geoguessr%21&url=https://github.com/webdevbrian/whereami">Twitter</a></p><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
             $('#endGame').fadeIn(500);
 
           }
