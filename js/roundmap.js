@@ -16,7 +16,7 @@
           streetViewControl: false,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        var map = new google.maps.Map(document.getElementById("roundMap"), mapOptions);
+        var map = new google.maps.Map($('#roundMap')[0], mapOptions);
 
         var actualMarker = new google.maps.Marker({
             position: actualLtLng,

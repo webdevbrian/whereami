@@ -27,5 +27,6 @@ html,body { width: 100%; height: 100%;}
 #roundEnd #roundMap { width: 400px; height: 200px; background: red; margin: 20px 0; }
 #roundEnd .closeBtn { cursor: pointer; }
 
+#roundMap { width: 300px; height: 300px;}
 
 #endGame { position: absolute; top: 50%; left: 50%; width: 400px; margin: -190px 0 0 -240px; padding: 20px; background: #EFEFEF; text-align: center; display: none; z-index: 1000; }

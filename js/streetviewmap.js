@@ -37,7 +37,7 @@
 
             } else {
                 // no street view available in this range, or some error occurred
-                alert('Streetview is not available for this location :(');
+                alert('Streetview is not available for this location :( Mind telling us that you saw this?');
             }
         });
 

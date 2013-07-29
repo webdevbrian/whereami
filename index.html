@@ -1,8 +1,11 @@
 <!DOCTYPE html> 
-<html lang='en-us'>
+<html>
 <head>
   <meta charset='utf-8'>
   <title>Whereami</title>
+  <meta property="og:title" content="Whereami"/>
+  <meta property="og:type" content="game"/>
+  <meta property="og:url" content="https://github.com/webdevbrian/whereami"/>
   <link rel='stylesheet' href='css/bootstrap.css' />
   <link rel='stylesheet' href='css/style.css' /> 
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
@@ -67,6 +70,7 @@
             return (min <= x && x <= max);
         };
 
+        // Real basic point thresholds depending on kilometer distances
         if(inRange(distance, 1, 2)) {
           points = 10000;
         } else if(inRange(distance, 3, 10)) {
@@ -98,6 +102,7 @@
         };
 
         if (round < 5){
+
           round++
           roundScore = points;
           totalScore = totalScore + points;
@@ -106,10 +111,11 @@
           $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
           $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
 
-          $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location.<br/><div class="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+          $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location.<br/><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
           $('#roundEnd').fadeIn();
 
           // Reload maps to refresh coords
+
           svinitialize();
           mminitialize();
           rminitialize();
@@ -132,7 +138,7 @@
             totalScore = totalScore + points;
 
             $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
-            $('#endGame').html('<div class="roundMap"></div><h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/>Share this on:<br/><br/><a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/webdevbrian/whereami">Facebook</a> <a class="btn" href="https://twitter.com/intent/tweet?text=I+just+scored+'+totalScore+'+playing+whereami+by+@phrozen755,+based+off+of+geoguessr%21&url=https://github.com/webdevbrian/whereami">Twitter</a></p><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
+            $('#endGame').html('<h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/>Share this on:<br/><br/><a class="btn" href="http://www.facebook.com/sharer.php?s=100&p[title]=' + encodeURIComponent('Whereami') + '&p[summary]=' + encodeURIComponent('I just scored '+totalScore+' playing Whereami!') + '&p[url]=' + encodeURIComponent('https://github.com/webdevbrian/whereami') + '">Facebook</a> <a class="btn" href="https://twitter.com/intent/tweet?text=I+just+scored+'+totalScore+'+playing+whereami+by+@phrozen755,+based+off+of+geoguessr%21&url=https://github.com/webdevbrian/whereami">Twitter</a></p><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
             $('#endGame').fadeIn(500);
 
           }
@@ -140,6 +146,7 @@
           // Reload maps to refresh coords
           svinitialize();
           mminitialize();
+          rminitialize();
 
           // We're done with the game
           window.finished = true;
@@ -171,7 +178,7 @@
 </head> 
 <body>
   <div id='content'>
-    <div class="roundEnd"></div>
+    <div id="roundEnd"></div>
     <div id="endGame"></div>
     <div id='scoreBoard'>
       <span class='round'>Current Round: <b>1/5</b></span><br/>
