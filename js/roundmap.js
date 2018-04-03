@@ -15,13 +15,16 @@ function rminitialize() {
     var guessLtLng = new google.maps.LatLng(GuessLLArr[0],GuessLLArr[1]);
 
     var mapOptions = {
-      zoom: 2,
-      center: actualLtLng,
       mapTypeControl: false,
       streetViewControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     var map = new google.maps.Map($('#roundMap')[0], mapOptions);
+
+	var bounds = new google.maps.LatLngBounds();
+	bounds.extend(actualLtLng);
+	bounds.extend(guessLtLng);
+	map.fitBounds(bounds);
 
     var actualMarker = new google.maps.Marker({
         position: actualLtLng,
