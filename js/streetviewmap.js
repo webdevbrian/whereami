@@ -17,10 +17,9 @@
         var randCoord = coordArray[Math.floor(Math.random() * coordArray.length)];
         coordArrayLatLongs = randCoord.replace(/[\])}[{(]/g,'').split(',');
 
-        window.locLL = coordArrayLatLongs[0]+","+coordArrayLatLongs[1];
-
         // Do streetview
         var whoamiLocation = new google.maps.LatLng(coordArrayLatLongs[0],coordArrayLatLongs[1]);
+        window.locLL = whoamiLocation;
         var streetViewService = new google.maps.StreetViewService();
         var STREETVIEW_MAX_DISTANCE = 100;
 
