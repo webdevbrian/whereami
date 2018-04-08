@@ -9,11 +9,6 @@ function rminitialize() {
   // If locLatLongs or guessLatLongs are undefined, they didn't make a guess and there is no
   // round map for people who run out of time, so don't show it at all
   //
-    var currentLLArr = locLatLongs.replace(/[\])}[{(]/g,'').split(',');
-    var GuessLLArr = guessLatLongs.replace(/[\])}[{(]/g,'').replace(/\s/g, "").split(',');
-    var actualLtLng = new google.maps.LatLng(currentLLArr[0],currentLLArr[1]);
-    var guessLtLng = new google.maps.LatLng(GuessLLArr[0],GuessLLArr[1]);
-
     var mapOptions = {
       mapTypeControl: false,
       streetViewControl: false,
@@ -21,19 +16,19 @@ function rminitialize() {
     }
     var map = new google.maps.Map($('#roundMap')[0], mapOptions);
 
-	var bounds = new google.maps.LatLngBounds();
-	bounds.extend(actualLtLng);
-	bounds.extend(guessLtLng);
-	map.fitBounds(bounds);
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(window.locLL);
+    bounds.extend(window.guessLatLng);
+    map.fitBounds(bounds);
 
     var actualMarker = new google.maps.Marker({
-        position: actualLtLng,
+        position: window.locLL,
         title:"Actual Location",
         icon: 'img/actual.png'
     });
 
     var guessMarker = new google.maps.Marker({
-        position: guessLtLng,
+        position: window.guessLatLng,
         title:"Your Guess",
         icon: 'img/guess.png'
     });
