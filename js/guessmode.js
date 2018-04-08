@@ -1,10 +1,10 @@
 //
-// guessmode 
+// guessMode 
 //
 //  User is guessing 
 
 
-function guessmode() {
+function guessMode() {
 	// Setup - constants
 	var guessTimeLimitMs = 15000;
 	var guessTimeRefreshRateMs = 1000;
@@ -15,14 +15,24 @@ function guessmode() {
 
 	function onGuessEnded(inTime,guessLatLng) {}
 
-	function EndGuess(inTime,guessLatLng)
+	function endGuess(inTime,guessLatLng)
 	{
+		$("#guessButton").off("click");
       displayTimeLeft();       
       clearInterval(guessTimer);
 		onGuessEnded(inTime,guessLatLng);	
 	}
+	
+	function onGuessButtonClicked() {
+			endGuess(true,window.guessLatLng);
+	}
 
 	function init() {
+		// Guess Button
+	   $('#guessButton').click(function() {
+   		onGuessButtonClicked();
+   	});
+
 		guessTimeLeftMs = guessTimeLimitMs;
 		guessTimer = setInterval(onGuessTimer, guessTimeRefreshRateMs);
 	}
@@ -33,7 +43,7 @@ function guessmode() {
      if (guessTimeLeftMs <= 0) {
 		 guessTimeLeftMs = 0;
        console.log('Time is up');
-		 EndGuess(false,null,null);
+		 endGuess(false,null,null);
      }
      displayTimeLeft();
 	}
