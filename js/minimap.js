@@ -19,11 +19,11 @@ function mminitialize() {
 
   // Marker selection setup
   var guessMarkerOptions = new google.maps.Marker({
-      map: mMap,
-      visible: true,
-      title: 'Your guess',
-      draggable: false
-      //icon: '/img/googleMapsMarkers/red_MarkerB.png'
+    map: mMap,
+    visible: true,
+    title: 'Your guess',
+    draggable: false
+    //icon: '/img/googleMapsMarkers/red_MarkerB.png'
   });
 
   // Mini map marker setup
