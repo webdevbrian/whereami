@@ -145,15 +145,10 @@ $(document).ready(function() {
         endGame();
       }
 
-    } else {
-
-      // They ran out
-
     }
 
     timer();
     window.guessLatLng = '';
-
   }
 
   function endRound() {
@@ -187,7 +182,6 @@ $(document).ready(function() {
 
       window.guessLatLng = '';
       ranOut = false;
-
       points = 0;
 
     } else {
